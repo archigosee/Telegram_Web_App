@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Card from "./Components/Card/Card";
 import Cart from "./Components/Cart/Cart";
-import { Telegram } from '@telegram/web-app';
-
 const { getData } = require("./db/db");
 const foods = getData();
 
@@ -43,9 +41,6 @@ function App() {
   };
 
   const onCheckout = () => {
-    Telegram.WebApp.sendData({
-      cartItems: cartItems, // Pass the cartItems state
-    });
     tele.MainButton.text = "Pay :)";
     tele.MainButton.show();
   };
