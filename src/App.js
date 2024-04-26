@@ -12,7 +12,28 @@ function App() {
 
   useEffect(() => {
     tele.ready();
-  });
+
+    // Add event listener to the pay button
+    const payButton = document.getElementById('payButton');
+    payButton.addEventListener('click', function() {
+      fetch('https://a37f-196-188-35-100.ngrok.io/webhook', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: 'YOUR_CHAT_ID',
+          message_text: 'Payment Button Pressed',
+        }),
+      });
+    });
+
+  
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      payButton.removeEventListener('click', function() {});
+    };
+  }, []);
 
   const onAdd = (food) => {
     const exist = cartItems.find((x) => x.id === food.id);
